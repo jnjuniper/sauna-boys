@@ -1,8 +1,14 @@
-# React + Vite
+WELCOME TO THE SAUNA BOYS PROJECT 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+In this project we will be creating a E-commerce website, selling Sauna-related products.
 
-Currently, two official plugins are available:
+We will be using React as our JS-library https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+Team Sauna boys consists of
+👉 Anton Lundin
+   Amro Altai 👈
+   🫵Jonathan Neroth
+
+https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjRiMW4xeGVpNno2Z21hdHRuNTdnYWl6YndwMHc0c3E1MmoxbzkzZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pnjNutkPwy3g4/giphy.gif
