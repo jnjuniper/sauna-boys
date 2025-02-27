@@ -18,13 +18,18 @@ app.use(cors ({
 }));
 
 app.get("/api/products", (req, res) => {
+    const searchTerm = req.query.search || ""; // Default to an empty string if no search term is provided
 
-    const select = db.prepare("SELECT id, image, productName, productDescription, brand, SKU, price FROM products");
+    const select = db.prepare(`
+        SELECT id, image, productName, productDescription, brand, SKU, price 
+        FROM products
+        WHERE productName LIKE ?
+    `);
 
-    const products = select.all();
+    const products = select.all(`%${searchTerm}%`); // Using the LIKE operator to find products that match the search term
 
     res.json(products);
-})
+});
 
 app.get("/api/heroImages", (req, res) => {
 
