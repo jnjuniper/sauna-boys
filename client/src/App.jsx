@@ -17,9 +17,9 @@ function App() {
         <Route />
       </Routes>
       <Routes>
-        <InfoGrid />
       </Routes>
     </main>
+    <InfoGrid />
     </BrowserRouter>
   )
 }
