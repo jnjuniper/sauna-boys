@@ -6,7 +6,8 @@ const Header = () => {
       {/* Mobile Layout */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
         {/* Logo */}
-        <div className="text-xl font-bold">LOGO</div>
+        <div><img className="pl-1 h-[50px] w-[50px]" src="/src/assets/sb,logotype.png" alt="" /></div>
+
 
         {/* Search Bar & Icons */}
         <div className="flex flex-col w-full md:w-auto md:flex-1 md:ml-6">  
