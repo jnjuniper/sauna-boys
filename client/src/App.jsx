@@ -1,5 +1,6 @@
 
 import './App.css'
+import Header from './pages/Header/Header.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router'
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <header></header>
+    <Header />
     <main>
       <Routes>
         <Route />
