@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 
 const SearchPage = () => {
@@ -6,7 +6,7 @@ const SearchPage = () => {
   const [products, setProducts] = useState([]);
   const location = useLocation();
 
-  // Extract search term from the URL when the component mounts or when URL changes
+ 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const query = queryParams.get("query") || "";
@@ -17,7 +17,7 @@ const SearchPage = () => {
     }
   }, [location.search]);
 
-  // Fetch products based on the search term
+
   const fetchProducts = async (term) => {
     try {
       const response = await fetch(`/api/products?search=${term}`);
@@ -28,12 +28,12 @@ const SearchPage = () => {
     }
   };
 
-  // Update search term when input changes
+ 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  // Handle form submission
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     fetchProducts(searchTerm);
@@ -42,25 +42,29 @@ const SearchPage = () => {
   return (
     <div className="search-page">
       <main>
-        <section className="search-container">
-          <form onSubmit={handleSearchSubmit}>
+        <section className="search-container p-4">
+          <form onSubmit={handleSearchSubmit} className="mb-6">
             <input
               type="text"
               value={searchTerm}
               onChange={handleSearchChange}
               placeholder="Search for products..."
+              className="border p-2 rounded w-full mb-4"
             />
-            <button type="submit">Search</button>
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+              Search
+            </button>
           </form>
 
           {products.length > 0 ? (
-            <div className="product-list">
+            <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
-                <div className="product-card" key={product.id}>
-                  <img src={product.image} alt={product.productName} />
-                  <h3>{product.productName}</h3>
-                  <p>{product.brand}</p>
-                  <p>${product.price}</p>
+                <div className="product-card border rounded-lg p-4 shadow hover:shadow-lg" key={product.id}>
+                  <img className="w-full h-48 object-contain mb-4" src={product.image} alt={product.productName} />
+                  <h3 className="text-lg font-semibold">{product.productName}</h3>
+                  <p className="text-black font-bold text-right">${product.price}</p>
+                  <p className="text-gray-500">{product.brand}</p>
+                
                 </div>
               ))}
             </div>
