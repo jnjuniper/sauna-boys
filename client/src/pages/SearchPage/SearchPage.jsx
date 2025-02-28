@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
-
+import { Heart } from 'lucide-react';
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
@@ -61,7 +61,8 @@ const SearchPage = () => {
               {products.map((product) => (
                 <div className="product-card border rounded-lg p-4 shadow hover:shadow-lg" key={product.id}>
                   <img className="w-full h-48 object-contain mb-4" src={product.image} alt={product.productName} />
-                  <h3 className="text-lg font-semibold">{product.productName}</h3>
+                  <Heart className='cursor-pointer transition-transform duration-200 hover:scale-110 ml-auto' />
+                  <h3 className="text-lg font-semibold">{product.productName}</h3> 
                   <p className="text-black font-bold text-right">${product.price}</p>
                   <p className="text-gray-500">{product.brand}</p>
                 
