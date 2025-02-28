@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {Heart} from "lucide-react";
 
 const ProductGrid = () => {
   const [products, setProducts] = useState([]);
@@ -17,11 +18,13 @@ const ProductGrid = () => {
           <img
             src={product.image || "https://via.placeholder.com/150"}
             alt={product.name}
-            className="w-full h-40 object-cover mb-2 rounded-md"
+            className="w-full h-100 object-cover mb-2 rounded-md"
           />
-          <h2 className="text-lg font-semibold">{product.productName}</h2>
-          <p className="text-sm text-gray-600">{product.brand}</p>
-          <p className="text-lg font-bold">{product.price} SEK :-</p>
+          <Heart className='cursor-pointer transition-transform duration-200 hover:scale-110 mb-1 ml-auto' />
+          <h2 className="text-lg font-semibold text-left">{product.productName}</h2>
+          <p className="text-lg font-bold text-right">{product.price} SEK :-</p>
+          <p className="text-sm text-gray-600 text-left">{product.brand}</p>
+          
         </div>
       ))}
     </div>
