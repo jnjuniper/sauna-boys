@@ -1,117 +1,91 @@
 import { useState, useEffect } from 'react';
 
 function Hero() {
-  // State för bilder och spots
   const [heroImages, setHeroImages] = useState([]);
   const [spots, setSpots] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
-  // Hämta hero-bilder och spots när komponenten laddas
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    // Hämta hero-bilder
     fetch('/api/heroImages')
       .then(response => response.json())
-      .then(data => {
-        setHeroImages(data);
-      })
+      .then(data => setHeroImages(data))
       .catch(error => {
         console.error('Kunde inte hämta hero-bilder:', error);
+        setError('Kunde inte hämta hero-bilder');
       });
-      
-    // Hämta spots
+
     fetch('/api/spots')
       .then(response => response.json())
-      .then(data => {
-        console.log('Spots data:', data);
-        setSpots(data);
-      })
+      .then(data => setSpots(data))
       .catch(error => {
         console.error('Kunde inte hämta spots:', error);
+        setError('Kunde inte hämta spots');
       });
   }, []);
-  
-  // Automatisk bildväxling var 5:e sekund
+
   useEffect(() => {
     if (heroImages.length > 1) {
       const timer = setInterval(() => {
         setIsTransitioning(true);
-        
         setTimeout(() => {
-          setCurrentIndex(prevIndex => 
-            prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
-          );
-          
-          setTimeout(() => {
-            setIsTransitioning(false);
-          }, 50);
+          setCurrentIndex(prevIndex => (prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1));
+          setTimeout(() => setIsTransitioning(false), 50);
         }, 500);
       }, 5000);
-      
+
       return () => clearInterval(timer);
     }
   }, [heroImages]);
-  
-  // Om vi inte har några bilder, visa en platshållare
+
+  if (error) {
+    return <div className="h-64 bg-gray-200 text-red-500">{error}</div>;
+  }
+
   if (heroImages.length === 0) {
     return <div className="h-64 bg-gray-200"></div>;
   }
-  
-  // Aktuell bild som ska visas
+
   const currentImage = heroImages[currentIndex];
-  
-  // CSS-klass för transition
   const transitionClass = isTransitioning ? 'opacity-0' : 'opacity-100';
-  
+
   return (
     <div>
-      {/* CSS för transition */}
-      <style>{`
-        .image-transition {
-          transition: opacity 0.5s ease-in-out;
-        }
-      `}</style>
-      
       {/* Mobil layout (<640px) */}
       <div className="sm:hidden">
         <div className="mb-10">
           <div className="h-64 relative overflow-hidden">
-            <img 
-              src={currentImage.image} 
-              alt={currentImage.altText} 
-              className={`w-full h-full object-cover image-transition absolute top-0 left-0 ${transitionClass}`}
+            <img
+              src={currentImage.image}
+              alt={currentImage.altText}
+              className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-500 ${transitionClass}`}
             />
           </div>
-          
           <div className="p-4 text-center">
             <h1 className="text-3xl font-bold mb-4">{currentImage.imageDescription}</h1>
-            <p className="text-gray-700 mb-4">
-              {currentImage.altText}
-            </p>
+            <p className="text-gray-700 mb-4">{currentImage.altText}</p>
           </div>
         </div>
       </div>
-      
+
       {/* Tablet layout (>=640px och <1024px) */}
       <div className="hidden sm:block lg:hidden">
         <div className="mb-10">
           <div className="h-96 relative overflow-hidden">
-            <img 
-              src={currentImage.image} 
-              alt={currentImage.altText} 
-              className={`w-full h-full object-cover image-transition absolute top-0 left-0 ${transitionClass}`}
+            <img
+              src={currentImage.image}
+              alt={currentImage.altText}
+              className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-500 ${transitionClass}`}
             />
           </div>
-          
           <div className="p-4 text-center">
             <h1 className="text-3xl font-bold mb-4">{currentImage.imageDescription}</h1>
-            <p className="text-gray-700 mb-4">
-              {currentImage.altText}
-            </p>
+            <p className="text-gray-700 mb-4">{currentImage.altText}</p>
           </div>
         </div>
       </div>
-      
+
       {/* Desktop layout (>=1024px) */}
       <div className="hidden lg:block">
         <div className="mb-10">
@@ -121,37 +95,30 @@ function Hero() {
             <div className="w-1/2 p-8 flex items-center">
               <div>
                 <h1 className="text-3xl font-bold mb-4">{currentImage.imageDescription}</h1>
-                <p className="text-gray-700 mb-4">
-                  {currentImage.altText}
-                </p>
+                <p className="text-gray-700 mb-4">{currentImage.altText}</p>
               </div>
             </div>
-            
             {/* Bild till höger med transition */}
             <div className="w-1/2 h-96 relative overflow-hidden">
-              <img 
-                src={currentImage.image} 
-                alt={currentImage.altText} 
-                className={`w-full h-full object-cover image-transition absolute top-0 left-0 ${transitionClass}`}
+              <img
+                src={currentImage.image}
+                alt={currentImage.altText}
+                className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-500 ${transitionClass}`}
               />
             </div>
           </div>
-          
           {/* Tre Spots */}
-          <div className="grid grid-cols-3 gap-6 hidden lg:grid">
-  {spots.length > 0 &&
-    spots.map(spot => (
-      <img 
-        key={spot.id} 
-        src={spot.image} 
-        alt={spot.altText || 'Spot image'} 
-        className="w-full h-[300px] object-cover"
-      />
-    ))
-  }
-</div>
-
-
+          <div className="grid grid-cols-3 gap-6">
+            {spots.length > 0 &&
+              spots.map(spot => (
+                <img
+                  key={spot.id}
+                  src={spot.image}
+                  alt={spot.altText || 'Spot image'}
+                  className="w-full h-[300px] object-cover"
+                />
+              ))}
+          </div>
         </div>
       </div>
     </div>
