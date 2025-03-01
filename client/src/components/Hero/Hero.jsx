@@ -23,6 +23,7 @@ function Hero() {
     fetch('/api/spots')
       .then(response => response.json())
       .then(data => {
+        console.log('Spots data:', data);
         setSpots(data);
       })
       .catch(error => {
@@ -136,28 +137,21 @@ function Hero() {
             </div>
           </div>
           
-          {/* Tre spots under hero med data från databasen */}
-          <div className="grid grid-cols-3 gap-6">
-            {spots.length > 0 ? (
-              spots.map(spot => (
-                <div key={spot.id} className="bg-gray-200 h-40 relative">
-                  <img 
-                    src={spot.image} 
-                    alt={spot.altText}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                    <span className="text-xl font-bold text-white">{spot.title}</span>
-                  </div>
-                </div>
-              ))
-            ) : (
-              // Placeholders om spots inte har laddats än
-              Array(3).fill().map((_, index) => (
-                <div key={index} className="bg-gray-200 h-40"></div>
-              ))
-            )}
-          </div>
+          {/* Tre Spots */}
+          <div className="grid grid-cols-3 gap-6 hidden lg:grid">
+  {spots.length > 0 &&
+    spots.map(spot => (
+      <img 
+        key={spot.id} 
+        src={spot.image} 
+        alt={spot.altText || 'Spot image'} 
+        className="w-full h-[300px] object-cover"
+      />
+    ))
+  }
+</div>
+
+
         </div>
       </div>
     </div>
