@@ -33,12 +33,18 @@ app.get("/api/products", (req, res) => {
 
 app.get("/api/heroImages", (req, res) => {
 
-    const select = db.prepare("SELECT id, image, altText FROM heroImages");
+    const select = db.prepare("SELECT id, image, altText, imageDescription FROM heroImages");
 
     const heroImages = select.all();
 
     res.json(heroImages);
 })
+
+app.get("/api/spots", (req, res) => {
+    const select = db.prepare("SELECT id, image, altText, title FROM spots");
+    const spots = select.all();
+    res.json(spots);
+});
 
 app.listen(port, () => {
     console.log(`Server started on ${port}`);
