@@ -30,7 +30,38 @@ app.get("/api/products", (req, res) => {
 
     res.json(products);
 });
+app.get("/api/products/:id", (req, res) => {
+    const { id } = req.params;
+    const select = db.prepare(`
+        SELECT id, image, productName, productDescription, brand, SKU, price 
+        FROM products 
+        WHERE id = ?
+    `);
+    const product = select.get(id);
+    if (product) {
+        res.json(product);
+    } else {
+        res.status(404).json({ error: "Product not found" });
+    }
+});
 
+// Get similar products (example: products with the same brand, excluding the current product)
+app.get("/api/similar-products/:id", (req, res) => {
+    const { id } = req.params;
+    const product = db.prepare("SELECT brand FROM products WHERE id = ?").get(id);
+    if (product) {
+        const selectSimilar = db.prepare(`
+            SELECT id, image, productName, productDescription, brand, SKU, price 
+            FROM products 
+            WHERE brand = ? AND id != ? 
+            LIMIT 3
+        `);
+        const similarProducts = selectSimilar.all(product.brand, id);
+        res.json(similarProducts);
+    } else {
+        res.status(404).json({ error: "Product not found" });
+    }
+});
 app.get("/api/heroImages", (req, res) => {
 
     const select = db.prepare("SELECT id, image, altText, imageDescription FROM heroImages");
