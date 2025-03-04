@@ -1,5 +1,6 @@
 const express = require("express");
 const Database = require("better-sqlite3");
+const bodyParser = require ("body-parser");
 const cors = require("cors");
 
 const port = 8000;
@@ -9,9 +10,12 @@ const db = new Database("./db/db.db", {
 });
 
 
-
-
 const app = express();
+
+// Parsar JSON som skickas till backend och gör informationen 
+// tillgänglig via req.body inuti route.
+
+app.use(bodyParser.json());
 
 app.use(cors ({
     origin: ["http://localhost:3000"]
@@ -45,6 +49,33 @@ app.get("/api/spots", (req, res) => {
     const spots = select.all();
     res.json(spots);
 });
+
+app.post('/api/products', (req,res) => {
+    const {image, productName, productDescription, brand, sku, price} = req.body;
+    const product = {image, productName, productDescription, brand, sku, price};
+
+    const insert = db.prepare(`
+        INSERT INTO products (
+        image,
+        productName,
+        productDescription,
+        brand,
+        sku,
+        price
+        ) VALUES (
+            @image,
+            @productName,
+            @productDescription,
+            @brand,
+            @sku,
+            @price 
+        )`
+    );
+
+    insert.run(product)
+
+    res.status(201).send()
+})
 
 app.listen(port, () => {
     console.log(`Server started on ${port}`);
