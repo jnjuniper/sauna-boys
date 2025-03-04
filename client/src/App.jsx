@@ -7,6 +7,7 @@ import Hero from "./components/Hero/Hero.jsx";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router";
 import ResponsiveFooter from "./components/Footer/ResponsiveFooter";
 import NewProduct from "./pages/Admin/AdminAdd.jsx";
+import AdminProductList from "./pages/Admin/AdminList.jsx";
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/" element={<ProductGrid />} />
           <Route path="/admin/products/new" element={<NewProduct />} />
+          <Route path="/admin/products" element={<AdminProductList />} />
         </Routes>
       </main>
 
