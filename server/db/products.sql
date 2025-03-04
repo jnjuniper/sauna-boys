@@ -4,7 +4,7 @@ CREATE TABLE products (
     productName TEXT NOT NULL,
     productDescription TEXT,
     brand TEXT,
-    SKU TEXT UNIQUE NOT NULL,
+    sku TEXT UNIQUE NOT NULL,
     price REAL NOT NULL
 );
 
