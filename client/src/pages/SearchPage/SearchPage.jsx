@@ -39,16 +39,6 @@ const SearchPage = () => {
   return (
     <div className="search-page flex-grow">
       <section className="search-container p-4">
-        <form onSubmit={handleSearchSubmit} className="mb-6">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            placeholder="Search for products..."
-            className="border p-2 rounded w-full mb-4"
-          />
-        </form>
-
         <div className="text-center mb-4">
           <p className="text-lg font-medium">
             {products.length > 0
