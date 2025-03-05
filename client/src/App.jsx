@@ -15,7 +15,7 @@ function App() {
   const isAdminPage = location.pathname.startsWith("/admin");
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       {/* Render Header only if it's NOT an admin page */}
       {!isAdminPage && (
         <Header
@@ -28,7 +28,7 @@ function App() {
       {/* Render Hero only on the homepage */}
       {!isAdminPage && location.pathname === "/" && <Hero />}
 
-      <main>
+      <main className="flex-grow flex flex-col">
         <Routes>
           <Route path="/search" element={<SearchPage />} />
           <Route path="/" element={<ProductGrid />} />
@@ -43,7 +43,7 @@ function App() {
           <ResponsiveFooter />
         </>
       )}
-    </>
+    </div>
   );
 }
 
