@@ -87,7 +87,7 @@ function Hero() {
       </div>
 
       {/* Desktop layout (>=1024px) */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block p-4">
         <div className="mb-10">
           {/* Hero-sektion: Text till vänster, bild till höger */}
           <div className="flex flex-row mb-8">
@@ -108,7 +108,7 @@ function Hero() {
             </div>
           </div>
           {/* Tre Spots */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-4">
             {spots.length > 0 &&
               spots.map(spot => (
                 <img
