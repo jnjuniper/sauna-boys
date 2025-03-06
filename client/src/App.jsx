@@ -4,6 +4,7 @@ import InfoGrid from "./components/InfoGrid/InfoGrid.jsx";
 import ProductGrid from "./components/ProductGrid/ProductGrid.jsx";
 import SearchPage from "./pages/SearchPage/SearchPage.jsx";
 import Hero from "./components/Hero/Hero.jsx";
+import ProductDetails from './pages/ProductDetails/ProductDetails.jsx';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router";
 import ResponsiveFooter from "./components/Footer/ResponsiveFooter";
 import NewProduct from "./pages/Admin/AdminAdd.jsx";
@@ -14,6 +15,7 @@ function App() {
 
   // Check if the current path is "/admin"
   const isAdminPage = location.pathname.startsWith("/admin");
+
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -35,6 +37,7 @@ function App() {
           <Route path="/" element={<ProductGrid />} />
           <Route path="/admin/products/new" element={<NewProduct />} />
           <Route path="/admin/products" element={<AdminProductList />} />
+          <Route path="/products/:slug" element={<ProductDetails />} />
         </Routes>
       </main>
 

@@ -25,7 +25,7 @@ app.get("/api/products", (req, res) => {
     const searchTerm = req.query.search || ""; // Default to an empty string if no search term is provided
 
     const select = db.prepare(`
-        SELECT id, image, productName, productDescription, brand, SKU, price 
+        SELECT id, image, productName, productDescription, brand, SKU, price, slug 
         FROM products
         WHERE productName LIKE ?
     `);
@@ -34,7 +34,38 @@ app.get("/api/products", (req, res) => {
 
     res.json(products);
 });
+app.get("/api/products/:slug", (req, res) => {
+    const { slug } = req.params;
+    const select = db.prepare(`
+        SELECT id, image, productName, productDescription, brand, SKU, price, slug
+        FROM products 
+        WHERE slug = ?
+    `);
+    const product = select.get(slug);
+    if (product) {
+        res.json(product);
+    } else {
+        res.status(404).json({ error: "Product not found" });
+    }
+});
 
+// Get similar products (example: products with the same brand, excluding the current product)
+app.get("/api/similar-products/:slug", (req, res) => {
+    const { slug } = req.params;
+    const product = db.prepare("SELECT brand FROM products WHERE slug = ?").get(slug);
+    if (product) {
+        const selectSimilar = db.prepare(`
+            SELECT id, image, productName, productDescription, brand, SKU, price, slug
+            FROM products 
+            WHERE brand = ? AND slug != ? 
+            LIMIT 3
+        `);
+        const similarProducts = selectSimilar.all(product.brand, slug);
+        res.json(similarProducts);
+    } else {
+        res.status(404).json({ error: "Product not found" });
+    }
+});
 app.get("/api/heroImages", (req, res) => {
 
     const select = db.prepare("SELECT id, image, altText, imageDescription FROM heroImages");
