@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 
 const ProductDetails = () => {
-  const { id } = useParams(); // Get product ID from URL
+  const { slug } = useParams(); // Get product slug from URL
   const navigate = useNavigate(); // Hook for navigation
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
@@ -11,7 +11,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/products/${id}`);
+        const response = await fetch(`/api/products/${slug}`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         setProduct(data);
@@ -23,7 +23,7 @@ const ProductDetails = () => {
 
     const fetchSimilarProducts = async () => {
       try {
-        const response = await fetch(`/api/similar-products/${id}`);
+        const response = await fetch(`/api/similar-products/${slug}`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         setSimilarProducts(data.slice(0, 3));
@@ -35,13 +35,13 @@ const ProductDetails = () => {
 
     fetchProduct();
     fetchSimilarProducts();
-  }, [id]);
+  }, [slug]);
 
   if (error) return <div className="text-center py-10 text-red-500">Fel: {error}</div>;
   if (!product) return <div className="text-center py-10">Laddar...</div>;
 
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`); // Navigate to the clicked product's details page
+  const handleProductClick = (productSlug) => {
+    navigate(`/product/${productSlug}`); // Navigate to the clicked product's details page
   };
 
   return (
@@ -56,7 +56,7 @@ const ProductDetails = () => {
           <p className="text-gray-600 mb-2">{product.brand}</p>
           <p className="text-gray-700 mb-4">{product.productDescription || 'Ingen beskrivning'}</p>
           <p className="text-xl font-semibold mb-4">{product.price} SEK</p>
-          <button className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800">
+          <button className="bg-black text-white px-6 py-2 rounded cursor-pointer hover:bg-gray-800">
             Lägg i varukorg
           </button>
         </div>
@@ -68,9 +68,9 @@ const ProductDetails = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {similarProducts.map((similarProduct) => (
             <div
-              key={similarProduct.id}
+              key={similarProduct.slug}
               className="text-center cursor-pointer hover:bg-gray-100 p-2 rounded-lg"
-              onClick={() => handleProductClick(similarProduct.id)} // Navigate on click
+              onClick={() => handleProductClick(similarProduct.slug)} // Navigate on click
             >
               <img
                 src={similarProduct.image}

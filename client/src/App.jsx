@@ -23,7 +23,7 @@ function App() {
           {/* Add other routes for ProductGrid, etc. */}
           <Route path="/" element={<ProductGrid />} />
 
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/product/:slug" element={<ProductDetails />} />
         </Routes>
       </main>
 

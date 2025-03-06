@@ -13,17 +13,17 @@ const ProductGrid = () => {
       .catch((error) => console.error('Error fetching products:', error));
   }, []);
 
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`); // Navigate to ProductDetails page with product ID
+  const handleProductClick = (productSlug) => {
+    navigate(`/product/${productSlug}`); // Navigate to ProductDetails page with product slug
   };
 
   return (
     <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 lg:grid-cols-4 text-center">
       {products.map((product) => (
         <div
-          key={product.id}
+          key={product.slug}
           className="border rounded-lg p-4 shadow-md cursor-pointer"
-          onClick={() => handleProductClick(product.id)} // Handle click to navigate
+          onClick={() => handleProductClick(product.slug)} // Handle click to navigate
         >
           <img
             src={product.image || 'https://via.placeholder.com/150'}
