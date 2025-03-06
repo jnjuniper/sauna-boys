@@ -6,16 +6,17 @@ CREATE TABLE products (
     productDescription TEXT,
     brand TEXT,
     sku TEXT UNIQUE NOT NULL,
-    price REAL NOT NULL
+    price REAL NOT NULL,
+    slug TEXT
 );
 
-ALTER TABLE products ADD COLUMN slug TEXT;
+
 
 UPDATE products
 SET slug = LOWER(REPLACE(productName, ' ', '-'));
 
 
-INSERT INTO products (image, productName, productDescription, brand, SKU, price, slug) 
+INSERT INTO products (image, productName, productDescription, brand, sku, price, slug) 
 VALUES 
 ('https://piggabutiken-18eaa.kxcdn.com/6865-large_default/better-you-eterisk-olja-boswellia-10ml.jpg', 'Eterisk Olja Boswellia 10ml', 'Ekologisk boswellia/frankincenseolja (Boswellia Serrata) framställd genom destillering av blad. En olja perfekt för meditation som ger en avlappnande effekt vid aromaterapi. Bra för torr, mogen och oren hud.', 'Better You', 'OL1', 199, 'eterisk-olja-boswellia-10ml'),
 ('https://piggabutiken-18eaa.kxcdn.com/8287-large_default/rosolja-eko-eterisk-5-ml.jpg', 'Eterisk Olja Ros 5ml', '100% eterisk ekologisk rosolja från Rosa Damascena, som är en av de absolut finaste och exklusivaste rossorterna. Den har en rik, varm, söt och blommig doft.', 'Better You', 'OL2', 249, 'eterisk-olja-ros-5ml'),
