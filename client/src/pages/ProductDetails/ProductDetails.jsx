@@ -41,7 +41,7 @@ const ProductDetails = () => {
   if (!product) return <div className="text-center py-10">Laddar...</div>;
 
   const handleProductClick = (productSlug) => {
-    navigate(`/product/${productSlug}`); // Navigate to the clicked product's details page
+    navigate(`/products/${productSlug}`); // Navigate to the clicked product's details page
   };
 
   return (

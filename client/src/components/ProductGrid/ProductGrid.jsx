@@ -14,7 +14,7 @@ const ProductGrid = () => {
   }, []);
 
   const handleProductClick = (productSlug) => {
-    navigate(`/product/${productSlug}`); // Navigate to ProductDetails page with product slug
+    navigate(`/products/${productSlug}`); // Navigate to ProductDetails page with product slug
   };
 
   return (
