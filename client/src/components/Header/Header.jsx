@@ -1,9 +1,9 @@
-import { Search, Heart, ShoppingBag } from "lucide-react";
+import { Search,} from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import HeaderIcons from "./components/HeaderIcons";
 
-const Header = ({ onSearch }) => {
+const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 

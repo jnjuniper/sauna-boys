@@ -3,14 +3,12 @@ import { useLocation } from "react-router";
 import { Heart } from "lucide-react";
 
 const SearchPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const query = queryParams.get("query") || "";
-    setSearchTerm(query);
 
     if (query) {
       fetchProducts(query);
@@ -27,14 +25,7 @@ const SearchPage = () => {
     }
   };
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    fetchProducts(searchTerm);
-  };
 
   return (
     <div className="search-page flex-grow">
