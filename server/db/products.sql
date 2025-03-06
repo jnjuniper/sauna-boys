@@ -5,9 +5,8 @@ CREATE TABLE products (
     productName TEXT NOT NULL,
     productDescription TEXT,
     brand TEXT,
-    SKU TEXT UNIQUE NOT NULL,
-    price REAL NOT NULL,
-    slug TEXT UNIQUE
+    sku TEXT UNIQUE NOT NULL,
+    price REAL NOT NULL
 );
 
 ALTER TABLE products ADD COLUMN slug TEXT;

@@ -30,7 +30,8 @@ const ProductGrid = () => {
             alt={product.name}
             className="w-full h-48 object-cover mb-2 rounded-md"
           />
-          <Heart className="cursor-pointer transition-transform duration-200 hover:scale-110 mb-1 ml-auto" />
+
+          <Heart className='cursor-pointer transition-transform duration-200 hover:scale-125 mb-1 ml-auto w-11 h-11' />
           <h2 className="text-lg font-semibold text-left">{product.productName}</h2>
           <p className="text-lg font-bold text-right">{product.price} SEK :-</p>
           <p className="text-sm text-gray-600 text-left">{product.brand}</p>
