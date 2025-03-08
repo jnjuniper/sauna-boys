@@ -1,4 +1,4 @@
-import { Search,} from "lucide-react";
+import { Search } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import HeaderIcons from "./components/HeaderIcons";
@@ -15,6 +15,7 @@ const Header = () => {
     e.preventDefault();
     if (searchTerm.trim()) {
       navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
+      setSearchTerm(""); // Clear the search term after navigation
     }
   };
 

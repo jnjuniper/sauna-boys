@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router"; 
 import { Heart } from "lucide-react";
 
 const SearchPage = () => {
   const [products, setProducts] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -25,7 +26,10 @@ const SearchPage = () => {
     }
   };
 
-
+ 
+  const handleProductClick = (productSlug) => {
+    navigate(`/products/${productSlug}`); 
+  };
 
   return (
     <div className="search-page flex-grow">
@@ -44,8 +48,9 @@ const SearchPage = () => {
           <div className="product-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.map((product) => (
               <div
-                className="product-card border rounded-lg p-4 shadow hover:shadow-lg"
+                className="product-card border rounded-lg p-4 shadow hover:shadow-lg cursor-pointer"
                 key={product.id}
+                onClick={() => handleProductClick(product.slug)}
               >
                 <img
                   className="w-full h-48 object-contain mb-4"
@@ -54,9 +59,7 @@ const SearchPage = () => {
                 />
                 <Heart className="cursor-pointer transition-transform duration-200 hover:scale-110 ml-auto" />
                 <h3 className="text-lg font-semibold">{product.productName}</h3>
-                <p className="text-black font-bold text-right">
-                  ${product.price}
-                </p>
+                <p className="text-black font-bold text-right">${product.price}</p>
                 <p className="text-gray-500">{product.brand}</p>
               </div>
             ))}

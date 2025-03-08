@@ -56,34 +56,34 @@ const ProductDetails = () => {
           <p className="text-gray-600 mb-2">{product.brand}</p>
           <p className="text-gray-700 mb-4">{product.productDescription || 'Ingen beskrivning'}</p>
           <p className="text-xl font-semibold mb-4">{product.price} SEK</p>
-          <button className="bg-black text-white px-6 py-2 rounded cursor-pointer hover:bg-gray-800">
+          <button className="bg-black text-white px-6 py-2 rounded cursor-pointer hover:bg-gray-800 w-full sm:w-auto">
             Lägg i varukorg
           </button>
         </div>
       </div>
 
-      {/* Similar Products Section */}
-      <div className="mt-10">
-        <h2 className="text-xl font-semibold mb-6">Liknande produkter</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {similarProducts.map((similarProduct) => (
-            <div
-              key={similarProduct.slug}
-              className="text-center cursor-pointer hover:bg-gray-100 p-2 rounded-lg"
-              onClick={() => handleProductClick(similarProduct.slug)} // Navigate on click
-            >
-              <img
-                src={similarProduct.image}
-                alt={similarProduct.productName}
-                className="w-full h-auto max-w-xs mx-auto"
-              />
-              <h3 className="text-lg font-medium mt-2">{similarProduct.productName}</h3>
-              <p className="text-gray-600">{similarProduct.brand}</p>
-              <p className="text-gray-800 font-semibold mt-1">{similarProduct.price} SEK</p>
-            </div>
-          ))}
-        </div>
+    
+      <div className="mt-10 hidden sm:block">
+  <h2 className="text-xl font-semibold mb-6 text-center">Liknande produkter</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {similarProducts.map((similarProduct) => (
+      <div
+        key={similarProduct.slug}
+        className="text-center cursor-pointer hover:bg-gray-100 p-2 rounded-lg"
+        onClick={() => handleProductClick(similarProduct.slug)} // Navigate on click
+      >
+        <img
+          src={similarProduct.image}
+          alt={similarProduct.productName}
+          className="w-full h-auto max-w-xs mx-auto"
+        />
+        <h3 className="text-lg font-medium mt-2 text-left">{similarProduct.productName}</h3>
+        <p className="text-gray-800 font-semibold mt-1 text-right">{similarProduct.price} SEK</p>
+        <p className="text-gray-600 text-left">{similarProduct.brand}</p>
       </div>
+    ))}
+  </div>
+</div>
     </div>
   );
 };
