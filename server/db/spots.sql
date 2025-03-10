@@ -1,4 +1,4 @@
--- database: db.db
+
 CREATE TABLE spots (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     image TEXT,
