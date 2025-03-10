@@ -59,7 +59,7 @@ const SearchPage = () => {
                 />
                 <Heart className="cursor-pointer transition-transform duration-200 hover:scale-110 ml-auto" />
                 <h3 className="text-lg font-semibold">{product.productName}</h3>
-                <p className="text-black font-bold text-right">${product.price}</p>
+                <p className="text-black font-bold text-right">{product.price} SEK</p>
                 <p className="text-gray-500">{product.brand}</p>
               </div>
             ))}
