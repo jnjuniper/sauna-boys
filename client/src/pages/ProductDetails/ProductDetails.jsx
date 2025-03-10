@@ -3,8 +3,8 @@ import { useParams, useNavigate } from "react-router";
 import { Heart } from "lucide-react";
 
 const ProductDetails = () => {
-  const { slug } = useParams(); // Get product slug from URL
-  const navigate = useNavigate(); // Hook for navigation
+  const { slug } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [error, setError] = useState(null);
@@ -45,12 +45,11 @@ const ProductDetails = () => {
   if (!product) return <div className="text-center py-10">Laddar...</div>;
 
   const handleProductClick = (productSlug) => {
-    navigate(`/products/${productSlug}`); // Navigate to the clicked product's details page
+    navigate(`/products/${productSlug}`);
   };
 
   return (
     <div className="container mx-auto px-4 py-6">
-      {/* Product Details Section */}
       <div className="flex flex-col md:flex-row gap-6 mb-10">
         <div className="w-full md:w-1/2">
           <img
@@ -58,7 +57,7 @@ const ProductDetails = () => {
             alt={product.productName}
             className="w-full h-auto max-w-xs md:max-w-md"
           />
-          <Heart className='sm:hidden cursor-pointer transition-transform duration-200 hover:scale-125 mb-1 ml-auto w-11 h-11' />
+          <Heart className="sm:hidden cursor-pointer transition-transform duration-200 hover:scale-125 mb-1 ml-auto w-11 h-11" />
         </div>
 
         <div className="w-full md:w-1/2">
@@ -83,7 +82,7 @@ const ProductDetails = () => {
             <div
               key={similarProduct.slug}
               className="text-center cursor-pointer hover:bg-gray-100 p-2 rounded-lg"
-              onClick={() => handleProductClick(similarProduct.slug)} // Navigate on click
+              onClick={() => handleProductClick(similarProduct.slug)}
             >
               <img
                 src={similarProduct.image}
