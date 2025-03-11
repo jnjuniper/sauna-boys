@@ -15,15 +15,13 @@ const Header = () => {
     e.preventDefault();
     if (searchTerm.trim()) {
       navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
-      setSearchTerm(""); // Clear the search term after navigation
+      setSearchTerm("");
     }
   };
 
   return (
     <header className="p-4 bg-white shadow-md">
-      {/* Mobile Layout */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-        {/* Logo */}
         <div>
           <a href="/">
             <img
@@ -34,7 +32,6 @@ const Header = () => {
           </a>
         </div>
 
-        {/* Search Bar & Icons */}
         <div className="flex items-center w-full md:w-auto md:flex-1 md:ml-6">
           <form
             onSubmit={handleSearchSubmit}
@@ -51,19 +48,17 @@ const Header = () => {
               <Search className="w-6 h-6 cursor-pointer hover:text-blue-500" />
             </button>
           </form>
-          {/* Icons for mobile */}
+
           <div className="flex md:hidden items-center space-x-4 ml-4">
             <HeaderIcons />
           </div>
         </div>
 
-        {/* Icons for desktop */}
         <div className="hidden md:flex items-center space-x-4">
           <HeaderIcons />
         </div>
       </div>
 
-      {/* Navigation Menu */}
       <nav className="mt-4 md:mt-2 flex flex-col md:flex-row md:space-x-6">
         <a href="#" className="hover:text-blue-600">
           Nyheter
