@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate} from "react-router";
-import "/src/pages/Admin/Admin.module.css";
 
 function NewProduct() {
   const [formData, setFormData] = useState({
