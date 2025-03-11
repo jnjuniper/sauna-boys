@@ -17,6 +17,7 @@ const ProductDetails = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         setProduct(data);
+        document.title = `${data.productName} - Sauna Boys`;
       } catch (error) {
         console.error("Error fetching product:", error);
         setError(error.message);
@@ -38,6 +39,9 @@ const ProductDetails = () => {
 
     fetchProduct();
     fetchSimilarProducts();
+    return () => {
+      document.title = "Sauna Boys";
+    };
   }, [slug]);
 
   if (error)
