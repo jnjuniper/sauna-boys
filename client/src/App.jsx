@@ -4,7 +4,7 @@ import InfoGrid from "./components/InfoGrid/InfoGrid.jsx";
 import ProductGrid from "./components/ProductGrid/ProductGrid.jsx";
 import SearchPage from "./pages/SearchPage/SearchPage.jsx";
 import Hero from "./components/Hero/Hero.jsx";
-import ProductDetails from './pages/ProductDetails/ProductDetails.jsx';
+import ProductDetails from "./pages/ProductDetails/ProductDetails.jsx";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router";
 import ResponsiveFooter from "./components/Footer/ResponsiveFooter";
 import NewProduct from "./pages/Admin/AdminAdd.jsx";
@@ -13,13 +13,10 @@ import AdminProductList from "./pages/Admin/AdminList.jsx";
 function App() {
   const location = useLocation();
 
-  // Check if the current path is "/admin"
   const isAdminPage = location.pathname.startsWith("/admin");
-
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Render Header only if it's NOT an admin page */}
       {!isAdminPage && (
         <Header
           onSearch={(searchTerm) =>
@@ -28,7 +25,6 @@ function App() {
         />
       )}
 
-      {/* Render Hero only on the homepage */}
       {!isAdminPage && location.pathname === "/" && <Hero />}
 
       <main className="flex-grow flex flex-col">
@@ -41,7 +37,6 @@ function App() {
         </Routes>
       </main>
 
-      {/* Render Footer only if it's NOT an admin page */}
       {!isAdminPage && (
         <>
           <InfoGrid />
