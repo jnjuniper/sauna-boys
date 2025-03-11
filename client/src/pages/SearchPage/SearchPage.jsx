@@ -21,6 +21,7 @@ const SearchPage = () => {
       const response = await fetch(`/api/products?search=${term}`);
       const data = await response.json();
       setProducts(data);
+
     } catch (error) {
       console.error("Error fetching products:", error);
     }
